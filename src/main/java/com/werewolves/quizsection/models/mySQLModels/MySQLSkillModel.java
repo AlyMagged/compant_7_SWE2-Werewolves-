@@ -23,4 +23,6 @@ public class MySQLSkillModel extends SkillModel {
             return 0;
         }
     }
+
+
 }

@@ -24,7 +24,7 @@ public class ChoiceController {
         return this.choiceService.getChoiceByID(id);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = {"","/"})
     public Choice updateChoiceByID(@RequestBody Choice choice){
         return this.choiceService.updateChoiceByID(choice);
     }

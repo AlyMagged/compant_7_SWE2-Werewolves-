@@ -1,11 +1,19 @@
 package com.werewolves.quizsection.entities;
 
-public class Choice {
+public class Choice
+{
     private int id;
     private String title;
+    private Question question;
+
+    public Choice(){}
 
     public Choice(int id) {
         this.id = id;
+    }
+
+    public Choice(String title) {
+        this.title = title;
     }
 
     public Choice(int id, String title) {
@@ -27,5 +35,13 @@ public class Choice {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 }

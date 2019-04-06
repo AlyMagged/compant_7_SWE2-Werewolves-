@@ -4,6 +4,10 @@ public class Choice {
     private int id;
     private String title;
 
+    public Choice(int id) {
+        this.id = id;
+    }
+
     public Choice(int id, String title) {
         this.id = id;
         this.title = title;

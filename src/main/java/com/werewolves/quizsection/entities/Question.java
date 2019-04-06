@@ -1,12 +1,13 @@
 package com.werewolves.quizsection.entities;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 public class Question {
     private int id;
     private String title;
-    private ArrayList<Choice> choices;
+    private Collection<Choice> choices;
     private int correctChoiceID;
+    private Quiz quiz;
 
     public Question() {
     }
@@ -20,7 +21,7 @@ public class Question {
         this.title = title;
     }
 
-    public Question(int id, String title, ArrayList<Choice> choices, int correctChoiceID) {
+    public Question(int id, String title, Collection<Choice> choices, int correctChoiceID) {
         this.id = id;
         this.title = title;
         this.choices = choices;
@@ -43,11 +44,11 @@ public class Question {
         this.title = title;
     }
 
-    public ArrayList<Choice> getChoices() {
+    public Collection<Choice> getChoices() {
         return choices;
     }
 
-    public void setChoices(ArrayList<Choice> choices) {
+    public void setChoices(Collection<Choice> choices) {
         this.choices = choices;
     }
 
@@ -83,4 +84,11 @@ public class Question {
         return false;
     }
 
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
 }

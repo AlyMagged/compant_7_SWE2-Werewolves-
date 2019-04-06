@@ -1,17 +1,18 @@
 package com.werewolves.quizsection.models;
 
 import com.werewolves.quizsection.entities.Choice;
-
 import java.util.Collection;
 
-public interface ChoiceModel {
-    Collection<Choice> getAllChoices();
+public abstract class ChoiceModel {
+    public abstract int add(Choice choice);
 
-    Choice getChoiceByID(int id);
+    abstract Collection<Choice> getAllChoices();
 
-    Choice updateChoiceByID(Choice choice);
+    abstract Choice getChoiceByID(int id);
 
-    Choice deleteChoiceByID(int id);
+    abstract Choice updateChoiceByID(Choice choice);
 
-    Choice insertChoice(Choice choice);
+    abstract Choice deleteChoiceByID(int id);
+
+    abstract Choice insertChoice(Choice choice);
 }

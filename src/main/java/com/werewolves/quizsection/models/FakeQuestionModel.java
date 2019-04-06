@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Repository
 @Qualifier("fakeQuestionModel")
-public class FakeQuestionModel implements QuestionModel {
+public class FakeQuestionModel extends QuestionModel {
 
     private static Map<Integer , Question> questions;
 
@@ -26,6 +26,11 @@ public class FakeQuestionModel implements QuestionModel {
         };
     }
 
+
+    @Override
+    public int add(Question question) {
+        return 0;
+    }
 
     @Override
     public Collection<Question> getAllQuestions() {

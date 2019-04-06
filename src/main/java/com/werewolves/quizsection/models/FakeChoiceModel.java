@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Repository
 @Qualifier("fakeChoiceModel")
-public class FakeChoiceModel implements ChoiceModel {
+public class FakeChoiceModel extends ChoiceModel {
     private static Map<Integer , Choice> choices;
 
     static {
@@ -22,6 +22,11 @@ public class FakeChoiceModel implements ChoiceModel {
                 put(4 , new Choice(4 , "werewolves"));
             }
         };
+    }
+
+    @Override
+    public int add(Choice choice) {
+        return 0;
     }
 
     @Override

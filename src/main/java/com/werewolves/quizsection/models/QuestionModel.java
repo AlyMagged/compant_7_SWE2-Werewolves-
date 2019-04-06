@@ -1,19 +1,19 @@
 package com.werewolves.quizsection.models;
 
-
 import com.werewolves.quizsection.entities.Question;
 
 import java.util.Collection;
 
-public interface QuestionModel {
+public abstract class QuestionModel extends Model {
+    public abstract int add(Question question);
 
-    Collection<Question> getAllQuestions();
+    abstract Collection<Question> getAllQuestions();
 
-    Question getQuestionByID(int id);
+    abstract Question getQuestionByID(int id);
 
-    Question updateQuestionByID(Question question);
+    abstract Question updateQuestionByID(com.werewolves.quizsection.entities.Question question);
 
-    Question deleteQuestionByID(int id);
+    abstract Question deleteQuestionByID(int id);
 
-    Question insertQuestion(Question question);
+    abstract Question insertQuestion(com.werewolves.quizsection.entities.Question question);
 }

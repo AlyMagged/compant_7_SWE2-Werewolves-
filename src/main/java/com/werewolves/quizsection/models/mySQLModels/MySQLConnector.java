@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class MySQLConnector {
-    private static String databaseName = "jdbc:mysql://localhost/swe_project";
+    private static String databaseName = "jdbc:mysql://localhost/quizComponent";
     private static String username = "root";
     private static String password = "";
     private static Connection con;
@@ -19,6 +19,7 @@ public class MySQLConnector {
             con = DriverManager.getConnection(databaseName, username, password);
             return true;
         } catch (Exception var1) {
+            System.out.println(var1);
             return false;
         }
     }

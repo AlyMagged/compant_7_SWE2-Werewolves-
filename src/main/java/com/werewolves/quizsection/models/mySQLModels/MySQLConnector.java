@@ -19,6 +19,7 @@ public class MySQLConnector {
             con = DriverManager.getConnection(databaseName, username, password);
             return true;
         } catch (Exception var1) {
+            System.out.println(var1);
             return false;
         }
     }

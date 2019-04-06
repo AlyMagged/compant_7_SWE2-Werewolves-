@@ -6,13 +6,13 @@ import java.util.Collection;
 public abstract class ChoiceModel {
     public abstract int add(Choice choice);
 
-    abstract Collection<Choice> getAllChoices();
+    public abstract Collection<Choice> getAllChoices();
 
-    abstract Choice getChoiceByID(int id);
+    public abstract Choice getChoiceByID(int id);
 
-    abstract Choice updateChoiceByID(Choice choice);
+    public abstract Choice updateChoiceByID(Choice choice);
 
-    abstract Choice deleteChoiceByID(int id);
+    public abstract Choice deleteChoiceByID(int id);
 
-    abstract Choice insertChoice(Choice choice);
+    public abstract Choice insertChoice(Choice choice);
 }

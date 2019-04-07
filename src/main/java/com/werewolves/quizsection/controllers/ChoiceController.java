@@ -35,7 +35,9 @@ public class ChoiceController {
     }
 
     @PostMapping(value = {"" , "/"})
-    public Choice insertChoice(@RequestBody Choice choice){
-        return this.choiceService.insertChoice(choice);
+    public Choice insertChoice(@RequestBody Choice c){
+        //Choice c = new Choice(10 , "title" , 2);
+
+        return this.choiceService.insertChoice(c);
     }
 }

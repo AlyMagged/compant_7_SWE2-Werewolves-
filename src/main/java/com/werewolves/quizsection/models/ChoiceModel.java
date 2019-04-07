@@ -3,8 +3,7 @@ package com.werewolves.quizsection.models;
 import com.werewolves.quizsection.entities.Choice;
 import java.util.Collection;
 
-public abstract class ChoiceModel {
-    public abstract int add(Choice choice);
+abstract public class ChoiceModel {
 
     public abstract Collection<Choice> getAllChoices();
 
@@ -14,5 +13,5 @@ public abstract class ChoiceModel {
 
     public abstract Choice deleteChoiceByID(int id);
 
-    public abstract Choice insertChoice(Choice choice);
+    public abstract int insertChoice(Choice c);
 }

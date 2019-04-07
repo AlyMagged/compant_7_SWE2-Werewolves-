@@ -10,7 +10,7 @@ import java.util.Collection;
 @Service
 public class ChoiceService {
     @Autowired
-    @Qualifier("fakeChoiceModel")
+    @Qualifier("MySQLChoiceModel")
     private ChoiceModel choiceModel;
 
     public Collection<Choice> getAllChoices() {
@@ -46,12 +46,12 @@ public class ChoiceService {
         }
     }
 
-    public Choice insertChoice(Choice choice) {
-        Choice Newchoice = choiceModel.insertChoice(choice);
-        if(choice == null){
+    public Choice insertChoice(Choice c) {
+        int result = choiceModel.insertChoice(c);
+        if(result == 0){
             /** will be modified **/
             return null;
         }
-        return Newchoice;
+        return c;
     }
 }

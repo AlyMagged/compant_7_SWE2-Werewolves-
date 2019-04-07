@@ -4,7 +4,7 @@ public class Choice
 {
     private int id;
     private String title;
-    private Question question;
+    private int questionID;
 
     public Choice(){}
 
@@ -20,6 +20,14 @@ public class Choice
         this.id = id;
         this.title = title;
     }
+
+    public Choice(int id, String title, int questionID) {
+        this.id = id;
+        this.title = title;
+        this.questionID = questionID;
+    }
+
+
 
     public int getId() {
         return id;
@@ -37,11 +45,11 @@ public class Choice
         this.title = title;
     }
 
-    public Question getQuestion() {
-        return question;
+    public int getQuestion() {
+        return questionID;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestion(int qId) {
+        this.questionID = qId;
     }
 }

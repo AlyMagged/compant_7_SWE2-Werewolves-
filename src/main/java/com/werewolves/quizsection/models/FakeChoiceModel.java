@@ -16,18 +16,14 @@ public class FakeChoiceModel extends ChoiceModel {
     static {
         choices = new HashMap<Integer, Choice>(){
             {
-                put(1 , new Choice(1 , "Muhammed"));
-                put(2 , new Choice(2 , "Shrief"));
-                put(3 , new Choice(3 , "Ali"));
-                put(4 , new Choice(4 , "werewolves"));
+                put(1 , new Choice(1 , "Muhammed" , 2));
+                put(2 , new Choice(2 , "Shrief" , 2));
+                put(3 , new Choice(3 , "Ali" , 2));
+                put(4 , new Choice(4 , "werewolves" , 2));
             }
         };
     }
 
-    @Override
-    public int add(Choice choice) {
-        return 0;
-    }
 
     @Override
     public Collection<Choice> getAllChoices() {
@@ -53,8 +49,8 @@ public class FakeChoiceModel extends ChoiceModel {
     }
 
     @Override
-    public Choice insertChoice(Choice choice) {
+    public int insertChoice(Choice choice) {
         this.choices.put(choice.getId() , choice);
-        return choices.get(choice.getId());
+            return 1;
     }
 }

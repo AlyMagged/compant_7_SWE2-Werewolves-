@@ -1,6 +1,5 @@
 package com.werewolves.quizsection.models.mySQLModels;
 
-import com.werewolves.quizsection.entities.Choice;
 import com.werewolves.quizsection.entities.Skill;
 import com.werewolves.quizsection.models.SkillModel;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -57,10 +57,9 @@ public class MySQLQuizModel extends QuizModel {
     }
 
     @Override
-    public int addQuiz(Quiz quiz) {
-        quiz.setId(counter++);
-        this.quizzes.put(quiz.getId() , quiz);
-        return quiz.getId();
+    public Quiz addQuiz(Quiz quiz) {
+        quizzes.put(quiz.getId() , quiz);
+        return quizzes.get(quiz.getId());
     }
 
     @Override

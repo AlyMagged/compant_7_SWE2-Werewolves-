@@ -38,7 +38,7 @@ public class QuizController {
     }
 
     @PostMapping (value = {"" , "/"})
-    public int addQuiz( @RequestBody Quiz quiz)
+    public Quiz addQuiz( @RequestBody Quiz quiz)
     {
         return this.quizService.addQuiz(quiz) ;
     }

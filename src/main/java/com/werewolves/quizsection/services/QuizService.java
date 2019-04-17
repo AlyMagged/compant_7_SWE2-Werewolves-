@@ -30,9 +30,13 @@ public class QuizService {
         return this.quizModel.getQuizBySkill(skillId) ;
     }
 
-    public int addQuiz(Quiz quiz)
+    public Quiz addQuiz(Quiz quiz)
     {
-        return this.quizModel.addQuiz(quiz) ;
+        Quiz q = this.quizModel.addQuiz(quiz) ;
+        if(q == null){
+            return null;
+        }
+        return q;
     }
     public Boolean updateQuiz(Quiz quiz)
     {

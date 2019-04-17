@@ -58,9 +58,31 @@ public class MySQLQuizModel extends QuizModel {
 
     @Override
     public Boolean deleteQuiz(int quizId) {
-        if(!this.quizzes.containsKey(quizId))
+
+        if(!quizzes.containsKey(quizId))
             return false;
-        this.quizzes.remove(quizId);
+        quizzes.remove(quizId);
+
         return true;
+    }
+    @Override
+    public Collection<Quiz> getQuizBySkill(int skillId) {
+        Collection<Quiz> quizzes2  =new ArrayList<>() ;
+        for (int i =0 ; i<quizzes.size() ; ++i)
+        {
+            if (skillId != quizzes.get(i).getSkill().getId()) {
+                continue;
+            }
+            quizzes2.add(quizzes.get(i)) ;
+        }
+        if (quizzes2.size()==0 )
+        {
+            return null ;
+        }
+        else
+        {
+            return quizzes2 ;
+        }
+
     }
 }

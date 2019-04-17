@@ -10,18 +10,36 @@ public class Question {
     private Quiz quiz;
 
     public Question() {
+        quiz = new Quiz();
     }
 
+    public Question(int id) {
+        this();
+        this.id = id;
+    }
+
+
     public Question(int id, String title) {
+        this();
         this.id = id;
         this.title = title;
     }
 
+    public Question(int id, String title , int quizId) {
+        this();
+        this.id = id;
+        this.title = title;
+        this.quiz.setId(quizId);
+    }
+
+
     public Question(String title) {
+        this();
         this.title = title;
     }
 
     public Question(int id, String title, Collection<Choice> choices, int correctChoiceID) {
+        this();
         this.id = id;
         this.title = title;
         this.choices = choices;
@@ -84,11 +102,11 @@ public class Question {
         return false;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
+    public int getQuizId() {
+        return quiz.getId();
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+    public void setQuizId(int id) {
+        this.quiz.setId(id);
     }
 }

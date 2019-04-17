@@ -5,20 +5,35 @@ public class Choice
     private int id;
     private String title;
     private Question question;
+    private Quiz quiz;
 
-    public Choice(){}
+    public Choice(){
+        quiz = new Quiz();
+        question = new Question();
+    }
 
     public Choice(int id) {
+        this();
         this.id = id;
     }
 
     public Choice(String title) {
+        this();
         this.title = title;
     }
 
     public Choice(int id, String title) {
+        this();
         this.id = id;
         this.title = title;
+    }
+
+    public Choice(int id, String title , int questionId , int quizId) {
+        this();
+        this.id = id;
+        this.title = title;
+        this.question.setId(questionId);
+        this.quiz.setId(quizId);
     }
 
     public int getId() {
@@ -37,11 +52,20 @@ public class Choice
         this.title = title;
     }
 
-    public Question getQuestion() {
-        return question;
+    public int getQuestionID() {
+        return question.getId();
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public int getQuizID() {
+        return this.quiz.getId();
     }
+
+    public void setQuestionId(int id) {
+        this.question.setId(id);
+    }
+
+    public void setQuizId(int id) {
+        this.quiz.setId(id);
+    }
+
 }

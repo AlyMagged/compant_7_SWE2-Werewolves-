@@ -15,17 +15,19 @@ public class Quiz {
         this.id = id;
     }
 
-    public Quiz(int creatorId, String title, int passScore) {
+    public Quiz(int creatorId, String title, int passScor, Skill skillٍ) {
         this.creatorId = creatorId;
         this.title = title;
         this.passScore = passScore;
+        this.skill = skillٍ;
     }
 
-    public Quiz(int id, int creatorId, String title, int passScore) {
+    public Quiz(int id, int creatorId, String title, int passScore, Skill skill) {
         this.id = id;
         this.creatorId = creatorId;
         this.title = title;
         this.passScore = passScore;
+        this.skill = skill;
     }
 
     public int getId() {

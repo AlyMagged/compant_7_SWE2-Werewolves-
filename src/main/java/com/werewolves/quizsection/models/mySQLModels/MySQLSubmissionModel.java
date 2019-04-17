@@ -48,4 +48,26 @@ public class MySQLSubmissionModel extends SubmissionModel {
         return this.submissions.get(id);
     }
 
+    @Override
+    public Collection<Submission> getSubmissionForQuiz(int quizId)
+    {
+        Collection<Submission> submissions = new ArrayList<>();
+        for (Submission submission : this.submissions.values()) {
+            if(submission.getQuiz().getId() == quizId)
+                submissions.add(submission);
+        }
+        return submissions;
+    }
+
+    @Override
+    public Collection<Submission> getSubmissionForUser(int userId)
+    {
+        Collection<Submission> submissions = new ArrayList<>();
+        for (Submission submission : this.submissions.values()) {
+            if(submission.getUserId() == userId)
+                submissions.add(submission);
+        }
+        return submissions;
+    }
+
 }

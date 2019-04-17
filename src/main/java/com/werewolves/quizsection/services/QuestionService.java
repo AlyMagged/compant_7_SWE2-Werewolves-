@@ -15,13 +15,13 @@ public class QuestionService {
     @Qualifier("fakeQuestionModel")
     QuestionModel questionModel;
 
-    public Collection<Question> getAllQuestions() {
-        Collection<Question> questions = this.questionModel.getAllQuestions();
+    public Collection<Question> getAllQuestions(int quizId) {
+        Collection<Question> questions = this.questionModel.getAllQuestions(quizId);
         return questions;
     }
 
-    public Question getQuestionByID(int id) {
-        Question question = this.questionModel.getQuestionByID(id);
+    public Question getQuestionByID(int quizId, int id) {
+        Question question = this.questionModel.getQuestionByID(quizId ,id);
         if(question == null){
             /** will be modified **/
             return null;
@@ -30,30 +30,29 @@ public class QuestionService {
         }
     }
 
-    public Question updateQuestionByID(Question question) {
-        Question updatedQuestion = this.questionModel.updateQuestionByID(question);
-        /** will be some validation about the updateChoice value **/
-        if(question == null){
-            /** will be modified **/
-            return null;
-        }else{
-            return question;
-        }
-    }
-
-    public void deleteQuestionByID(int id) {
-        Question question = this.questionModel.deleteQuestionByID(id);
-        if(question == null){
-            /** will be modified **/
-        }
-    }
-
-    public Question insertQuestion(Question question) {
-        Question NewQuestion = this.questionModel.insertQuestion(question);
+    public Question insertQuestion(int quizId, Question question) {
+        Question NewQuestion = this.questionModel.insertQuestion(quizId ,question);
         if(question == null){
             /** will be modified **/
             return null;
         }
         return NewQuestion;
+    }
+
+    public Question updateQuestionByID(int quizId, Question question) {
+        Question updatedQuestion = this.questionModel.updateQuestionByID(quizId ,question);
+        /** will be some validation about the updateChoice value **/
+        if(updatedQuestion == null){
+            /** will be modified **/
+            return null;
+        }
+        return updatedQuestion;
+    }
+
+    public void deleteQuestionByID(int quizId, int id) {
+        Question question = this.questionModel.deleteQuestionByID(quizId ,id);
+        if(question == null){
+            /** will be modified **/
+        }
     }
 }

@@ -13,13 +13,13 @@ public class ChoiceService {
     @Qualifier("fakeChoiceModel")
     private ChoiceModel choiceModel;
 
-    public Collection<Choice> getAllChoices() {
-        Collection<Choice> choices = choiceModel.getAllChoices();
+    public Collection<Choice> getAllChoices(int quizId, int questionId) {
+        Collection<Choice> choices = choiceModel.getAllChoices(quizId , questionId);
         return choices;
     }
 
-    public Choice getChoiceByID(int id) {
-        Choice choice = choiceModel.getChoiceByID(id);
+    public Choice getChoiceByID(int quizId, int questionId, int id) {
+        Choice choice = choiceModel.getChoiceByID(quizId , questionId , id);
         if(choice == null){
             /** will be modified **/
             return null;
@@ -28,30 +28,30 @@ public class ChoiceService {
         }
     }
 
-    public Choice updateChoiceByID(Choice choice) {
-        Choice updatedChoice = choiceModel.updateChoiceByID(choice);
+    public Choice updateChoiceByID(int quizId, int questionId, Choice choice) {
+        Choice updatedChoice = choiceModel.updateChoiceByID(quizId , questionId , choice);
         /** will be some validation about the updateChoice value **/
         if(choice == null){
             /** will be modified **/
             return null;
         }else{
-            return choice;
+            return updatedChoice;
         }
     }
 
-    public void deleteChoiceByID(int id) {
-        Choice choice = choiceModel.deleteChoiceByID(id);
+    public void deleteChoiceByID(int quizId, int questionId, int id) {
+        Choice choice = choiceModel.deleteChoiceByID(quizId , questionId ,id);
         if(choice == null){
             /** will be modified **/
         }
     }
 
-    public Choice insertChoice(Choice choice) {
-        Choice Newchoice = choiceModel.insertChoice(choice);
-        if(choice == null){
+    public Choice insertChoice(int quizId, int questionId, Choice choice) {
+        Choice newChoice = choiceModel.insertChoice(quizId , questionId ,choice);
+        if(newChoice == null){
             /** will be modified **/
             return null;
         }
-        return Newchoice;
+        return newChoice;
     }
 }

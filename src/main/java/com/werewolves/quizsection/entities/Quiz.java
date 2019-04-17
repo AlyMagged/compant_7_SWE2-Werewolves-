@@ -11,6 +11,10 @@ public class Quiz {
     private Collection<Submission> submissions;
     private Collection<Question> questions;
 
+    public Quiz(){
+
+    }
+
     public Quiz(int id) {
         this.id = id;
     }

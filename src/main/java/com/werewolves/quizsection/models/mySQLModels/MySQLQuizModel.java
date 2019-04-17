@@ -19,26 +19,41 @@ public class MySQLQuizModel extends QuizModel {
     static {
         quizzes = new HashMap<Integer, Quiz>(){
             {
-                put(1 , new Quiz(1,2,"Quiz 1", 50, new Skill(1) ));
-                put(2 , new Quiz(2,2,"Quiz 2", 10, new Skill(1) ));
-                put(3 , new Quiz(3,2,"Quiz 3", 13, new Skill(1) ));
-                put(4 , new Quiz(4,2,"Quiz 4", 14, new Skill(1) ));
+                put(1 , new Quiz(1,2,"Quiz 1", 50, 1 ));
+                put(2 , new Quiz(2,2,"Quiz 2", 10, 1 ));
+                put(3 , new Quiz(3,2,"Quiz 3", 13, 1 ));
+                put(4 , new Quiz(4,2,"Quiz 4", 14, 1 ));
             }
         };
     }
 
     @Override
     public Collection<Quiz> getAllQuizzes() {
-        Collection<Quiz> quizzes = new ArrayList<>();
-        for (Quiz quiz : this.quizzes.values()) {
-            quizzes.add(quiz);
-        }
-        return quizzes;
+        return quizzes.values();
     }
 
     @Override
     public Quiz getQuizByID(int id) {
+
         return quizzes.get(id);
+    }
+
+    @Override
+    public Collection<Quiz> getQuizBySkill(int skillId) {
+        Collection<Quiz> quizzes2  =new ArrayList<>() ;
+        for (Integer key : quizzes.keySet()) {
+            Quiz value = quizzes.get(key);
+            if (skillId == value.getSkill().getId()) {
+                quizzes2.add(value) ;
+            }
+
+        }
+        if (quizzes2.isEmpty() )
+        {
+            return null ;
+        }
+        return quizzes2 ;
+
     }
 
     @Override
@@ -65,24 +80,5 @@ public class MySQLQuizModel extends QuizModel {
 
         return true;
     }
-    @Override
-    public Collection<Quiz> getQuizBySkill(int skillId) {
-        Collection<Quiz> quizzes2  =new ArrayList<>() ;
-        for (int i =0 ; i<quizzes.size() ; ++i)
-        {
-            if (skillId != quizzes.get(i).getSkill().getId()) {
-                continue;
-            }
-            quizzes2.add(quizzes.get(i)) ;
-        }
-        if (quizzes2.size()==0 )
-        {
-            return null ;
-        }
-        else
-        {
-            return quizzes2 ;
-        }
 
-    }
 }

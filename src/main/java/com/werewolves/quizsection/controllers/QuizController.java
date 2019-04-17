@@ -16,16 +16,10 @@ public class QuizController {
     @Autowired
     private QuizService quizService ;
 
-//    @GetMapping(value = "/{s}")
-//    public String test(@PathVariable String s)
-//    {
-//        return s ;
-//    }
-
-    //Done
     @GetMapping (value = {"", "/"})
     public Collection<Quiz> getAllQuizzes()
     {
+
         return this.quizService.getAllQuizzes() ;
     }
 
@@ -33,13 +27,14 @@ public class QuizController {
     @GetMapping (value = "/{id}")
     public Quiz getQuizByID(@PathVariable  int id)
     {
+
         return this.quizService.getQuizByID(id) ;
     }
 
-    @GetMapping (value = {"skill/{id}" ,  "/skill/{id}"})
-    public Collection<Quiz> getQuizzesBySkill(@PathVariable int skillId)
+    @GetMapping (value = "/skill/{id}")
+    public Collection<Quiz> getQuizzesBySkill(@PathVariable int id)
     {
-        return this.quizService.getQuizBySkill(skillId) ;
+        return this.quizService.getQuizBySkill(id) ;
     }
 
     @PostMapping (value = {"" , "/"})

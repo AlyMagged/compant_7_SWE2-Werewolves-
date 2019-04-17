@@ -7,6 +7,7 @@ public class Skill {
     private String name;
     private Collection<Quiz> quizzes;
 
+    public Skill(){}
     public Skill(int id) {
         this.id = id;
     }

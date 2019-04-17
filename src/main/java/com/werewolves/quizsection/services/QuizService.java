@@ -24,6 +24,7 @@ public class QuizService {
     {
         return this.quizModel.getQuizByID(id) ;
     }
+
     public Collection<Quiz> getQuizBySkill(int skillId)
     {
         return this.quizModel.getQuizBySkill(skillId) ;

@@ -11,23 +11,29 @@ public class Quiz {
     private Collection<Submission> submissions;
     private Collection<Question> questions;
 
+    public Quiz(){
+        skill = new Skill();
+    }
+
     public Quiz(int id) {
+        this();
         this.id = id;
     }
 
-    public Quiz(int creatorId, String title, int passScor, Skill skillٍ) {
+    public Quiz(int creatorId, String title, int passScor, int skillIdٍ) {
+        this();
         this.creatorId = creatorId;
         this.title = title;
         this.passScore = passScore;
-        this.skill = skillٍ;
+        this.skill.setId(skillIdٍ);
     }
 
-    public Quiz(int id, int creatorId, String title, int passScore, Skill skill) {
-        this.id = id;
+    public Quiz(int id, int creatorId, String title, int passScore, int skillId) {
+        this(id);
         this.creatorId = creatorId;
         this.title = title;
         this.passScore = passScore;
-        this.skill = skill;
+        this.skill.setId(skillId);
     }
 
     public int getId() {

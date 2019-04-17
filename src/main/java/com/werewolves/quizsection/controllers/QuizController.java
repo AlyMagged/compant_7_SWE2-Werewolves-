@@ -50,8 +50,8 @@ public class QuizController {
     }
 
     @DeleteMapping (value = "/{id}")
-    public Boolean deleteQuiz(@PathVariable int quizId)
+    public Boolean deleteQuiz(@PathVariable int id)
     {
-        return this.quizService.deleteQuiz(quizId) ;
+        return this.quizService.deleteQuiz(id) ;
     }
 }

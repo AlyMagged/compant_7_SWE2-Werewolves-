@@ -22,24 +22,24 @@ public class SkillController {
     @GetMapping(value = {"", "/"})
     public Collection<Skill> getAllSkills()
     {
-        return null;
+        return skillService.getAllSkills();
     }
 
     @GetMapping(value = {"/{id}"})
     public Skill getSkillByID(@PathVariable int id)
     {
-        return null;
+        return skillService.getSkillByID(id);
     }
 
     @PutMapping(value = {"", "/"})
-    public Skill updateSkill(@RequestBody Skill skill)
+    public Boolean updateSkill(@RequestBody Skill skill)
     {
-        return null;
+        return skillService.updateSkill(skill);
     }
 
     @DeleteMapping(value = "/{id}")
     public Boolean deleteSkill(@PathVariable int id)
     {
-        return true;
+        return skillService.deleteSkill(id);
     }
 }

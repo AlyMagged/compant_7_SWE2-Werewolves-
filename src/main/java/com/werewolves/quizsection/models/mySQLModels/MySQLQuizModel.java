@@ -19,33 +19,47 @@ public class MySQLQuizModel extends QuizModel {
     static {
         quizzes = new HashMap<Integer, Quiz>(){
             {
-                put(1 , new Quiz(1,2,"Quiz 1", 50, new Skill(1) ));
-                put(2 , new Quiz(2,2,"Quiz 2", 10, new Skill(1) ));
-                put(3 , new Quiz(3,2,"Quiz 3", 13, new Skill(1) ));
-                put(4 , new Quiz(4,2,"Quiz 4", 14, new Skill(1) ));
+                put(1 , new Quiz(1,2,"Quiz 1", 50, 1 ));
+                put(2 , new Quiz(2,2,"Quiz 2", 10, 1 ));
+                put(3 , new Quiz(3,2,"Quiz 3", 13, 1 ));
+                put(4 , new Quiz(4,2,"Quiz 4", 14, 1 ));
             }
         };
     }
 
     @Override
     public Collection<Quiz> getAllQuizzes() {
-        Collection<Quiz> quizzes = new ArrayList<>();
-        for (Quiz quiz : this.quizzes.values()) {
-            quizzes.add(quiz);
-        }
-        return quizzes;
+        return quizzes.values();
     }
 
     @Override
     public Quiz getQuizByID(int id) {
+
         return quizzes.get(id);
     }
 
     @Override
-    public int addQuiz(Quiz quiz) {
-        quiz.setId(counter++);
-        this.quizzes.put(quiz.getId() , quiz);
-        return quiz.getId();
+    public Collection<Quiz> getQuizBySkill(int skillId) {
+        Collection<Quiz> quizzes2  =new ArrayList<>() ;
+        for (Integer key : quizzes.keySet()) {
+            Quiz value = quizzes.get(key);
+            if (skillId == value.getSkill().getId()) {
+                quizzes2.add(value) ;
+            }
+
+        }
+        if (quizzes2.isEmpty() )
+        {
+            return null ;
+        }
+        return quizzes2 ;
+
+    }
+
+    @Override
+    public Quiz addQuiz(Quiz quiz) {
+        quizzes.put(quiz.getId() , quiz);
+        return quizzes.get(quiz.getId());
     }
 
     @Override
@@ -58,9 +72,12 @@ public class MySQLQuizModel extends QuizModel {
 
     @Override
     public Boolean deleteQuiz(int quizId) {
-        if(!this.quizzes.containsKey(quizId))
+
+        if(!quizzes.containsKey(quizId))
             return false;
-        this.quizzes.remove(quizId);
+        quizzes.remove(quizId);
+
         return true;
     }
+
 }

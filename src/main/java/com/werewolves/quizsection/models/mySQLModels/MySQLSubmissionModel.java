@@ -19,10 +19,10 @@ public class MySQLSubmissionModel extends SubmissionModel {
     static {
         submissions = new HashMap<Integer, Submission>(){
             {
-                put(1 , new Submission(1,5,5, new Quiz(3), "2019-4-12 23:59:59"));
-                put(2 , new Submission(2,6,6, new Quiz(3), "2019-4-12 23:59:59"));
-                put(3 , new Submission(3,6,6, new Quiz(3), "2019-4-12 23:59:59"));
-                put(4 , new Submission(4,6,6, new Quiz(3), "2019-4-12 23:59:59"));
+                put(1 , new Submission(1,5,5, new Quiz(3), "2019-04-12 23:59:59"));
+                put(2 , new Submission(2,6,6, new Quiz(3), "2019-04-12 23:59:59"));
+                put(3 , new Submission(3,6,6, new Quiz(3), "2019-04-12 23:59:59"));
+                put(4 , new Submission(4,6,6, new Quiz(3), "2019-04-12 23:59:59"));
             }
         };
     }
@@ -70,4 +70,11 @@ public class MySQLSubmissionModel extends SubmissionModel {
         return submissions;
     }
 
+    private Boolean isExist(int id)
+    {
+        Submission submission = this.getSubmissionByID(id);
+        if(submission == null)
+            return false;
+        return true;
+    }
 }

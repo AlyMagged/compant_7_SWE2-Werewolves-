@@ -15,18 +15,6 @@ import java.util.Map;
 @Repository
 @Qualifier("MySQLSkillModel")
 public class MySQLSkillModel extends SkillModel {
-//    private static Map<Integer , Skill> skills;
-//    private static int counter = 5;
-//    static {
-//        skills = new HashMap<Integer, Skill>(){
-//            {
-//                put(1 , new Skill(1,"Html"));
-//                put(2 , new Skill(2,"CSS"));
-//                put(3 , new Skill(3,"JS"));
-//                put(4 , new Skill(4,"JQuery"));
-//            }
-//        };
-//    }
 
     private String tableName = "skills";
 
@@ -126,7 +114,7 @@ public class MySQLSkillModel extends SkillModel {
 
     private Boolean isExist(int id)
     {
-        Skill tempSkill = getSkillByID(id);
+        Skill tempSkill = this.getSkillByID(id);
         if(tempSkill == null)
             return false;
         return true;

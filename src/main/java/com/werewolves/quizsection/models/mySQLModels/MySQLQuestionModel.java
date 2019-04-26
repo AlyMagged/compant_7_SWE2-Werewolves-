@@ -1,7 +1,8 @@
-package com.werewolves.quizsection.models;
+package com.werewolves.quizsection.models.mySQLModels;
 
 
 import com.werewolves.quizsection.entities.Question;
+import com.werewolves.quizsection.models.QuestionModel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 

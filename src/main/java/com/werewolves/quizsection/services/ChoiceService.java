@@ -10,7 +10,7 @@ import java.util.Collection;
 @Service
 public class ChoiceService {
     @Autowired
-    @Qualifier("fakeChoiceModel")
+    @Qualifier("MySQLChoiceModel")
     private ChoiceModel choiceModel;
 
     public Collection<Choice> getAllChoices(int quizId, int questionId) {
@@ -28,26 +28,22 @@ public class ChoiceService {
         }
     }
 
-    public Choice updateChoiceByID(int quizId, int questionId, Choice choice) {
-        Choice updatedChoice = choiceModel.updateChoiceByID(quizId , questionId , choice);
-        /** will be some validation about the updateChoice value **/
-        if(choice == null){
-            /** will be modified **/
-            return null;
-        }else{
-            return updatedChoice;
+    public boolean updateChoiceByID(int quizId, int questionId, Choice choice) {
+        if(choiceModel.updateChoice(quizId , questionId , choice)) {
+            return true;
         }
+        return false;
     }
 
-    public void deleteChoiceByID(int quizId, int questionId, int id) {
-        Choice choice = choiceModel.deleteChoiceByID(quizId , questionId ,id);
-        if(choice == null){
-            /** will be modified **/
+    public boolean deleteChoiceByID(int quizId, int questionId, int id) {
+        if(choiceModel.deleteChoiceByID(quizId , questionId ,id)) {
+            return true;
         }
+        return false;
     }
 
-    public Choice insertChoice(int quizId, int questionId, Choice choice) {
-        Choice newChoice = choiceModel.insertChoice(quizId , questionId ,choice);
+    public Choice addChoice(int quizId, int questionId, Choice choice) {
+        Choice newChoice = choiceModel.addChoice(quizId , questionId ,choice);
         if(newChoice == null){
             /** will be modified **/
             return null;

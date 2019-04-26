@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-@Qualifier("fakeChoiceModel")
-public class FakeChoiceModel extends ChoiceModel {
+@Qualifier("MySQLChoiceModel")
+public class MySQLChoiceModel extends ChoiceModel {
     private static Map<Integer , Choice> choices;
 
     static {
@@ -53,7 +53,7 @@ public class FakeChoiceModel extends ChoiceModel {
     }
 
     @Override
-    public Choice insertChoice(int quizId, int questionId, Choice choice) {
+    public Choice addChoice(int quizId, int questionId, Choice choice) {
         choice.setQuizId(quizId);
         choice.setQuestionId(questionId);
         this.choices.put(choice.getId() , choice);
@@ -61,28 +61,26 @@ public class FakeChoiceModel extends ChoiceModel {
     }
 
     @Override
-    public Choice deleteChoiceByID(int quizId, int questionId, int id) {
-        Choice temp = null;
+    public boolean deleteChoiceByID(int quizId, int questionId, int id) {
         for(Integer key : choices.keySet()){
             Choice value = choices.get(key);
 
             if(value.getId() == id && value.getQuestionID() == questionId
                 && value.getQuizID() == quizId){
-                temp = value;
                 choices.remove(key);
-                break;
+                return true;
             }
         }
-        return temp;
+        return false;
     }
 
 
     @Override
-    public Choice updateChoiceByID(int quizId, int questionId, Choice newChoice) {
+    public boolean updateChoice(int quizId, int questionId, Choice newChoice) {
         Choice old = choices.get(newChoice.getId());
         old.setTitle(newChoice.getTitle());
         choices.put(old.getId(), old);
-        return old;
+        return true;
     }
 
 

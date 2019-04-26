@@ -12,7 +12,7 @@ import java.util.Collection;
 @Service
 public class QuestionService {
     @Autowired
-    @Qualifier("fakeQuestionModel")
+    @Qualifier("MySQLQuestionModel")
     QuestionModel questionModel;
 
     public Collection<Question> getAllQuestions(int quizId) {
@@ -31,7 +31,7 @@ public class QuestionService {
     }
 
     public Question insertQuestion(int quizId, Question question) {
-        Question NewQuestion = this.questionModel.insertQuestion(quizId ,question);
+        Question NewQuestion = this.questionModel.addQuestion(quizId ,question);
         if(question == null){
             /** will be modified **/
             return null;
@@ -39,20 +39,17 @@ public class QuestionService {
         return NewQuestion;
     }
 
-    public Question updateQuestionByID(int quizId, Question question) {
-        Question updatedQuestion = this.questionModel.updateQuestionByID(quizId ,question);
-        /** will be some validation about the updateChoice value **/
-        if(updatedQuestion == null){
-            /** will be modified **/
-            return null;
+    public boolean updateQuestionByID(int quizId, Question question) {
+        if(this.questionModel.updateQuestionByID(quizId ,question)) {
+            return true;
         }
-        return updatedQuestion;
+        return false;
     }
 
-    public void deleteQuestionByID(int quizId, int id) {
-        Question question = this.questionModel.deleteQuestionByID(quizId ,id);
-        if(question == null){
-            /** will be modified **/
+    public boolean deleteQuestionByID(int quizId, int id) {
+        if(this.questionModel.deleteQuestionByID(quizId ,id)) {
+            return true;
         }
+        return false;
     }
 }

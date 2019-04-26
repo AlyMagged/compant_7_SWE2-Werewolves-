@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-@Qualifier("fakeQuestionModel")
-public class FakeQuestionModel extends QuestionModel {
+@Qualifier("MySQLQuestionModel")
+public class MySQLQuestionModel extends QuestionModel {
 
     private static Map<Integer , Question> questions;
 
@@ -27,11 +27,6 @@ public class FakeQuestionModel extends QuestionModel {
         };
     }
 
-
-    @Override
-    public int add(Question question) {
-        return 0;
-    }
 
     @Override
     public Collection<Question> getAllQuestions(int quizId) {
@@ -57,7 +52,7 @@ public class FakeQuestionModel extends QuestionModel {
     }
 
     @Override
-    public Question insertQuestion(int quizId, Question question) {
+    public Question addQuestion(int quizId, Question question) {
         question.setQuizId(quizId);
         questions.put(question.getId() , question);
         Question newQ = this.questions.get(question.getId());
@@ -65,21 +60,19 @@ public class FakeQuestionModel extends QuestionModel {
     }
 
     @Override
-    public Question deleteQuestionByID(int quizId, int id) {
-        Question temp = null;
+    public boolean deleteQuestionByID(int quizId, int id) {
         for(Integer key : questions.keySet()){
             Question value = questions.get(key);
             if(key == id && value.getQuizId() == quizId){
-                temp = value;
                 questions.remove(key);
-                break;
+                return true;
             }
         }
-        return temp;
+        return false;
     }
 
     @Override
-    public Question updateQuestionByID(int quizId, Question newQuestion) {
+    public boolean updateQuestionByID(int quizId, Question newQuestion) {
         Question old = questions.get(newQuestion.getId());
         old.setCorrectChoiceID(newQuestion.getCorrectChoiceID());
         old.setChoices(newQuestion.getChoices());
@@ -87,7 +80,7 @@ public class FakeQuestionModel extends QuestionModel {
         old.setQuizId(quizId);
 
         this.questions.put(old.getId() , old);
-        return old;
+        return true;
     }
 
 

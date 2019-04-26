@@ -26,7 +26,7 @@ public class QuestionController {
     }
 
     @PostMapping(value = {"" , "/"})
-    public Question insertQuestion(@PathVariable int quizId ,@RequestBody Question question){
+    public Question addQuestion(@PathVariable int quizId ,@RequestBody Question question){
 
         return this.questionService.insertQuestion(quizId , question);
     }
@@ -38,8 +38,8 @@ public class QuestionController {
     }
 
     @PutMapping(value = {"" , "/"})
-    public Question updateQuestionByID(@PathVariable int quizId ,@RequestBody Question question){
-        return this.questionService.updateQuestionByID(quizId , question);
+    public void updateQuestionByID(@PathVariable int quizId ,@RequestBody Question question){
+        this.questionService.updateQuestionByID(quizId , question);
     }
 
 }

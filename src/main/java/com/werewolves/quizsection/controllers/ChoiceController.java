@@ -1,8 +1,6 @@
 package com.werewolves.quizsection.controllers;
 
 import com.werewolves.quizsection.entities.Choice;
-import com.werewolves.quizsection.entities.Question;
-import com.werewolves.quizsection.entities.Quiz;
 import com.werewolves.quizsection.services.ChoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +25,8 @@ public class ChoiceController {
     }
 
     @PostMapping(value = {"" , "/"})
-    public Choice insertChoice(@PathVariable int quizId ,@PathVariable int questionId ,@RequestBody Choice choice){
-        return this.choiceService.insertChoice(quizId , questionId ,choice);
+    public Choice addChoice(@PathVariable int quizId ,@PathVariable int questionId ,@RequestBody Choice choice){
+        return this.choiceService.addChoice(quizId , questionId ,choice);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -38,8 +36,8 @@ public class ChoiceController {
 
 
     @PutMapping(value = {"","/"})
-    public Choice updateChoiceByID(@PathVariable int quizId ,@PathVariable int questionId ,@RequestBody Choice choice){
-        return this.choiceService.updateChoiceByID(quizId ,questionId ,choice);
+    public void updateChoiceByID(@PathVariable int quizId ,@PathVariable int questionId ,@RequestBody Choice choice){
+        this.choiceService.updateChoiceByID(quizId ,questionId ,choice);
     }
 
 

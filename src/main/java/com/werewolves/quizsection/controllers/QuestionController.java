@@ -26,9 +26,9 @@ public class QuestionController {
     }
 
     @PostMapping(value = {"" , "/"})
-    public Question addQuestion(@PathVariable int quizId ,@RequestBody Question question){
+    public int addQuestion(@RequestBody Question question){
 
-        return this.questionService.insertQuestion(quizId , question);
+        return this.questionService.insertQuestion(question);
     }
 
     @DeleteMapping(value = "/{id}")

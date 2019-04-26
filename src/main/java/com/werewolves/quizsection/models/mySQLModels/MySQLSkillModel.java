@@ -9,13 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 @Repository
 @Qualifier("MySQLSkillModel")
 public class MySQLSkillModel extends SkillModel {
-
     private String tableName = "skills";
 
     @Override

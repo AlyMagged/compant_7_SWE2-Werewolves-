@@ -25,7 +25,7 @@ public class ChoiceController {
     }
 
     @PostMapping(value = {"" , "/"})
-    public Choice addChoice(@PathVariable int quizId ,@PathVariable int questionId ,@RequestBody Choice choice){
+    public int addChoice(@PathVariable int quizId ,@PathVariable int questionId ,@RequestBody Choice choice){
         return this.choiceService.addChoice(quizId , questionId ,choice);
     }
 

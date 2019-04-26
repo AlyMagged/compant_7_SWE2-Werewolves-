@@ -8,11 +8,11 @@ public abstract class QuestionModel extends Model {
 
     public abstract Collection<Question> getAllQuestions(int quizId);
 
-    public abstract Question getQuestionByID(int quizId, int id);
+    public abstract Question getQuestionByID(int id);
 
-    public abstract boolean updateQuestionByID(int quizId, Question question);
+    public abstract boolean updateQuestionByID(Question question);
 
-    public abstract boolean deleteQuestionByID(int quizId, int id);
+    public abstract boolean deleteQuestionByID(int id);
 
-    public abstract Question addQuestion(int quizId, Question question);
+    public abstract int addQuestion(Question question);
 }

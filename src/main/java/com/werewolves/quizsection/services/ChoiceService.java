@@ -14,12 +14,12 @@ public class ChoiceService {
     private ChoiceModel choiceModel;
 
     public Collection<Choice> getAllChoices(int quizId, int questionId) {
-        Collection<Choice> choices = choiceModel.getAllChoices(quizId , questionId);
+        Collection<Choice> choices = choiceModel.getAllChoices(questionId);
         return choices;
     }
 
     public Choice getChoiceByID(int quizId, int questionId, int id) {
-        Choice choice = choiceModel.getChoiceByID(quizId , questionId , id);
+        Choice choice = choiceModel.getChoiceByID(id);
         if(choice == null){
             /** will be modified **/
             return null;
@@ -29,25 +29,20 @@ public class ChoiceService {
     }
 
     public boolean updateChoiceByID(int quizId, int questionId, Choice choice) {
-        if(choiceModel.updateChoice(quizId , questionId , choice)) {
+        if(choiceModel.updateChoice(choice)) {
             return true;
         }
         return false;
     }
 
     public boolean deleteChoiceByID(int quizId, int questionId, int id) {
-        if(choiceModel.deleteChoiceByID(quizId , questionId ,id)) {
+        if(choiceModel.deleteChoiceByID(id)) {
             return true;
         }
         return false;
     }
 
-    public Choice addChoice(int quizId, int questionId, Choice choice) {
-        Choice newChoice = choiceModel.addChoice(quizId , questionId ,choice);
-        if(newChoice == null){
-            /** will be modified **/
-            return null;
-        }
-        return newChoice;
+    public int addChoice(int quizId, int questionId, Choice choice) {
+        return choiceModel.addChoice(questionId ,choice);
     }
 }

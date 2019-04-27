@@ -30,6 +30,6 @@ public class ChoiceServiceTest {
     public void add() {
         int x = 5 , y = 2;
         ChoiceService service = new ChoiceService();
-        assertEquals(6 , service.add(x , y));
+        assertEquals(7 , service.add(x , y));
     }
 }

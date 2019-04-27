@@ -1,7 +1,9 @@
 package com.werewolves.quizsection.controllers;
 
+import com.werewolves.quizsection.entities.QuestionAnswerPair;
 import com.werewolves.quizsection.entities.Submission;
 import com.werewolves.quizsection.services.SubmissionService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,13 +35,13 @@ public class SubmissionController {
     }
 
     @GetMapping(value = "/user/{userId}")
-    public Collection<Submission> getSubmissionsForUser(@PathVariable int userId)
+    public Collection<Submission>  getSubmissionsForUser(@PathVariable int userId)
     {
         return submissionService.getSubmissionsForUser(userId);
     }
 
     @PostMapping(value = "/quiz/{quizId}/user/{userId}")
-    public int addSubmission(@PathVariable int quizId, @PathVariable int userId, @RequestBody Collection<Integer> answersIds)
+    public int addSubmission(@PathVariable int quizId, @PathVariable int userId, @RequestBody Collection<QuestionAnswerPair> answersIds)
     {
         return submissionService.addSubmission(userId,quizId,answersIds);
     }

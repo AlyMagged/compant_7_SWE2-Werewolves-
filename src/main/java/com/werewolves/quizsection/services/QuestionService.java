@@ -3,11 +3,14 @@ package com.werewolves.quizsection.services;
 
 import com.werewolves.quizsection.entities.Question;
 import com.werewolves.quizsection.models.QuestionModel;
+import com.werewolves.quizsection.models.mySQLModels.MySQLQuestionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 @Service
 public class QuestionService {
@@ -46,5 +49,14 @@ public class QuestionService {
             return true;
         }
         return false;
+    }
+
+    public Map<Integer, Integer> getCorrectAnswerFor(ArrayList<Integer> questionsIds)
+    {
+        if(this.questionModel == null)
+            this.questionModel = new MySQLQuestionModel();
+        Map<Integer, Integer> map = this.questionModel.getCorrectAnswerFor(questionsIds);
+        System.out.println(map);
+        return map;
     }
 }

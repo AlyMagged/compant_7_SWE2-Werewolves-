@@ -155,6 +155,53 @@ public class MySQLQuestionModel extends QuestionModel {
         return  result;
     }
 
+    public Map<Integer, Integer> getCorrectAnswerFor(ArrayList<Integer> questionsIds)
+    {
+        MySQLConnector.openConnection();
+        String oring = generateOring("id",questionsIds);
+        String q = "SELECT id, correct_answer_id FROM "+this.tableName+" WHERE "+oring;
+        System.out.println(q);
+        ResultSet resultSet = MySQLConnector.executeQuery(q);
+        Map<Integer, Integer> questions = new HashMap<>();
+
+        System.out.println(resultSet);
+
+        int question_id, correct_answer_id;
+        try {
+            while(resultSet.next())
+            {
+                question_id = resultSet.getInt("id");
+                correct_answer_id = resultSet.getInt("correct_answer_id");
+
+                questions.put(question_id,correct_answer_id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            MySQLConnector.closeConnection();
+
+            return null;
+        }
+        MySQLConnector.closeConnection();
+        return questions;
+
+    }
+
+    private String generateOring(String key,ArrayList<Integer> values)
+    {
+        if(values.size()<1)
+            return "";
+
+        String result ="";
+        for(int i=0;i<values.size();i++)
+        {
+            result = " " + key + " = " + values.get(i);
+            if(i+1<values.size())
+                result += " OR ";
+        }
+        return  result;
+    }
+
     private Boolean isExist(int id)
     {
         Question question = this.getQuestionByID(id);

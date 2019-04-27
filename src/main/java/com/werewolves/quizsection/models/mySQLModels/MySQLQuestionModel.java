@@ -10,10 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 @Qualifier("MySQLQuestionModel")
@@ -25,26 +22,35 @@ public class MySQLQuestionModel extends QuestionModel {
     public Collection<Question> getAllQuestions(int quizId) {
         MySQLConnector.openConnection();
         String q = "SELECT " +
-                "q.id q_id, " +
+                "q.id question_id, " +
                 "q.question_title, " +
                 "q.quiz_id, " +
                 "q.correct_answer_id, " +
-                "c.id c_id, " +
+                "c.id choice_id, " +
                 "c.answer " +
                 "FROM " +
                 this.tableName+" q LEFT JOIN choices c " +
                 "ON q.id = c.question_id " +
                 "WHERE q.quiz_id = "+quizId;
-        ResultSet resultSet = MySQLConnector.executeQuery(q);
 
+        ResultSet resultSet = MySQLConnector.executeQuery(q);
+        Map<Integer , Question> questions = getQuestionsFromResultSet(resultSet);
+        MySQLConnector.closeConnection();
+
+        if(questions == null)
+            return null;
+        return questions.values();
+    }
+
+    public static Map<Integer , Question> getQuestionsFromResultSet(ResultSet resultSet) {
         Map<Integer , Question> questions = new HashMap<Integer, Question>();
         Question questionTemp = null;
 
         int
-                q_id,
+                question_id,
                 quiz_id,
                 correct_answer_id,
-                c_id;
+                choice_id;
 
         String
                 question_title,
@@ -53,30 +59,28 @@ public class MySQLQuestionModel extends QuestionModel {
         try {
             while(resultSet.next())
             {
-                q_id = resultSet.getInt("q_id");
+                question_id = resultSet.getInt("question_id");
                 quiz_id = resultSet.getInt("quiz_id");
                 correct_answer_id = resultSet.getInt("correct_answer_id");
-                c_id = resultSet.getInt("c_id");
+                choice_id = resultSet.getInt("choice_id");
 
                 question_title = resultSet.getString("question_title");
                 answer = resultSet.getString("answer");
 
-                questionTemp = questions.get(q_id);
+                questionTemp = questions.get(question_id);
                 if(questionTemp == null)
-                    questionTemp = new Question(q_id,question_title , new Choice(correct_answer_id),  new Quiz(quiz_id));
+                    questionTemp = new Question(question_id,question_title , new Choice(correct_answer_id),  new Quiz(quiz_id));
 
 
-                questionTemp.addChoice(new Choice(c_id, answer));
+                questionTemp.addChoice(new Choice(question_id, answer));
                 questions.put(questionTemp.getId(),questionTemp);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-            MySQLConnector.closeConnection();
             return null;
         }
-        MySQLConnector.closeConnection();
-        return questions.values();
+        return questions;
     }
 
     @Override
@@ -84,11 +88,11 @@ public class MySQLQuestionModel extends QuestionModel {
         MySQLConnector.openConnection();
 
         String q = "SELECT " +
-                "q.id q_id, " +
+                "q.id question_id, " +
                 "q.question_title, " +
                 "q.quiz_id, " +
                 "q.correct_answer_id, " +
-                "c.id c_id, " +
+                "c.id choice_id, " +
                 "c.answer " +
                 "FROM " +
                 this.tableName+" q LEFT JOIN choices c " +
@@ -96,44 +100,21 @@ public class MySQLQuestionModel extends QuestionModel {
                 "WHERE q.id = "+id;
 
 
-        Question questionTemp = null;
-
-        int
-                q_id,
-                quiz_id,
-                correct_answer_id,
-                c_id;
-
-        String
-                question_title,
-                answer;
+        Question question = null;
 
         ResultSet resultSet = MySQLConnector.executeQuery(q);
-        try {
-            while(resultSet.next())
-            {
-                q_id = resultSet.getInt("q_id");
-                quiz_id = resultSet.getInt("quiz_id");
-                correct_answer_id = resultSet.getInt("correct_answer_id");
-                c_id = resultSet.getInt("c_id");
 
-                question_title = resultSet.getString("question_title");
-                answer = resultSet.getString("answer");
+        Map<Integer , Question> questions = getQuestionsFromResultSet(resultSet);
 
-                if(questionTemp == null)
-                    questionTemp = new Question(q_id,question_title , new Choice(correct_answer_id),  new Quiz(quiz_id));
-
-
-                questionTemp.addChoice(new Choice(c_id, answer));
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            MySQLConnector.closeConnection();
-            return null;
-        }
         MySQLConnector.closeConnection();
-        return questionTemp;
+
+        if(questions == null)
+            return null;
+
+        if(!questions.values().iterator().hasNext())
+            return null;
+
+        return questions.values().iterator().next();
     }
 
     @Override

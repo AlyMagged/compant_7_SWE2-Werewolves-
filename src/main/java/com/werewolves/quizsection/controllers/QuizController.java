@@ -19,7 +19,6 @@ public class QuizController {
     @GetMapping (value = {"", "/"})
     public Collection<Quiz> getAllQuizzes()
     {
-
         return this.quizService.getAllQuizzes() ;
     }
 
@@ -43,7 +42,7 @@ public class QuizController {
         return this.quizService.addQuiz(quiz) ;
     }
 
-    @PutMapping (value = "/{id}")
+    @PutMapping (value = {"" , "/"})
     public Boolean updateQuiz( @RequestBody Quiz quiz)
     {
         return this.quizService.updateQuiz(quiz) ;

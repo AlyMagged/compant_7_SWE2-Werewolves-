@@ -1,5 +1,8 @@
 package com.werewolves.quizsection.entities;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Quiz {
@@ -8,9 +11,9 @@ public class Quiz {
     private String title;
     private int passScore;
     private float duration;
-    private Skill skill;
-    private Collection<Submission> submissions;
-    private Collection<Question> questions;
+    private Skill skill = null;
+    private Collection<Submission> submissions = null;
+    private Collection<Question> questions = null;
 
     public Quiz(){}
 
@@ -34,6 +37,7 @@ public class Quiz {
         this.duration = duration;
         this.skill = skill;
     }
+
 
     public Quiz(int id, int creatorId, String title, int passScore, float duration, Skill skill, Collection<Question> questions) {
         this.id = id;
@@ -107,5 +111,25 @@ public class Quiz {
 
     public void setQuestions(Collection<Question> questions) {
         this.questions = questions;
+    }
+
+    public void addQuestion(Question question)
+    {
+        if(this.questions == null)
+            this.questions = new ArrayList<>();
+        this.questions.add(question);
+    }
+
+    public Boolean hasQuestion(int questionId)
+    {
+        if(questions == null)
+            return false;
+
+        for(Question q : questions)
+        {
+            if(q.getId() == questionId)
+                return true;
+        }
+        return  false;
     }
 }

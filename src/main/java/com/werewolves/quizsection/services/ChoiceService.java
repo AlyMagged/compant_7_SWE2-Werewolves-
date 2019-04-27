@@ -45,4 +45,8 @@ public class ChoiceService {
     public int addChoice(int quizId, int questionId, Choice choice) {
         return choiceModel.addChoice(questionId ,choice);
     }
+
+    public int add(int x , int y){
+        return x+y;
+    }
 }

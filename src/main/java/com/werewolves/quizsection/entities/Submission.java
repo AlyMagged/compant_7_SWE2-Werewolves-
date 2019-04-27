@@ -7,34 +7,39 @@ public class Submission {
     private int score;
     private int userId;
     private String submitTime;
-    private Collection<Quiz> quizzes;
+    private Quiz quiz;
 
     public Submission(int id) {
         this.id = id;
     }
 
-    public Submission(int score, int userId) {
+    public Submission(int score, int userId, Quiz quiz) {
         this.score = score;
         this.userId = userId;
+        this.quiz = quiz;
     }
 
-    public Submission(int id, int score, int userId) {
+    public Submission(int id, int score, int userId, Quiz quiz) {
         this.id = id;
         this.score = score;
         this.userId = userId;
+        this.quiz = quiz;
+
     }
 
-    public Submission(int score, int userId, String submitTime) {
+    public Submission(int score, int userId, Quiz quiz, String submitTime) {
         this.score = score;
         this.userId = userId;
+        this.quiz = quiz;
         this.submitTime = submitTime;
     }
 
-    public Submission(int id, int score, int userId, String submitTime) {
+    public Submission(int id, int score, int userId, Quiz quiz, String submitTime) {
         this.id = id;
         this.score = score;
         this.userId = userId;
         this.submitTime = submitTime;
+        this.quiz = quiz;
     }
 
     public int getId() {
@@ -69,11 +74,12 @@ public class Submission {
         this.submitTime = submitTime;
     }
 
-    public Collection<Quiz> getQuizzes() {
-        return quizzes;
+
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setQuizzes(Collection<Quiz> quizzes) {
-        this.quizzes = quizzes;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }

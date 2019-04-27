@@ -21,6 +21,17 @@ public class Choice
         this.title = title;
     }
 
+    public Choice(String title, Question question) {
+        this.title = title;
+        this.question = question;
+    }
+
+    public Choice(int id, String title, Question question) {
+        this.id = id;
+        this.title = title;
+        this.question = question;
+    }
+
     public int getId() {
         return id;
     }

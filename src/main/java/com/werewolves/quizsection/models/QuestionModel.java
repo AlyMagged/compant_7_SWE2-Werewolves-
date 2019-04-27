@@ -2,18 +2,21 @@ package com.werewolves.quizsection.models;
 
 import com.werewolves.quizsection.entities.Question;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 public abstract class QuestionModel extends Model {
-    public abstract int add(Question question);
 
-    public abstract Collection<Question> getAllQuestions();
+    public abstract Collection<Question> getAllQuestions(int quizId);
 
     public abstract Question getQuestionByID(int id);
 
-    public abstract Question updateQuestionByID(com.werewolves.quizsection.entities.Question question);
+    public abstract boolean updateQuestionByID(Question question);
 
-    public abstract Question deleteQuestionByID(int id);
+    public abstract boolean deleteQuestionByID(int id);
 
-    public abstract Question insertQuestion(com.werewolves.quizsection.entities.Question question);
+    public abstract int addQuestion(Question question);
+
+    public abstract Map<Integer, Integer> getCorrectAnswerFor(ArrayList<Integer> questionsIds);
 }

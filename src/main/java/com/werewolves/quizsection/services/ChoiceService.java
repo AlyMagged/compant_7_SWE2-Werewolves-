@@ -10,15 +10,15 @@ import java.util.Collection;
 @Service
 public class ChoiceService {
     @Autowired
-    @Qualifier("fakeChoiceModel")
+    @Qualifier("MySQLChoiceModel")
     private ChoiceModel choiceModel;
 
-    public Collection<Choice> getAllChoices() {
-        Collection<Choice> choices = choiceModel.getAllChoices();
+    public Collection<Choice> getAllChoices(int quizId, int questionId) {
+        Collection<Choice> choices = choiceModel.getAllChoices(questionId);
         return choices;
     }
 
-    public Choice getChoiceByID(int id) {
+    public Choice getChoiceByID(int quizId, int questionId, int id) {
         Choice choice = choiceModel.getChoiceByID(id);
         if(choice == null){
             /** will be modified **/
@@ -28,30 +28,21 @@ public class ChoiceService {
         }
     }
 
-    public Choice updateChoiceByID(Choice choice) {
-        Choice updatedChoice = choiceModel.updateChoiceByID(choice);
-        /** will be some validation about the updateChoice value **/
-        if(choice == null){
-            /** will be modified **/
-            return null;
-        }else{
-            return choice;
+    public boolean updateChoiceByID(int quizId, int questionId, Choice choice) {
+        if(choiceModel.updateChoice(choice)) {
+            return true;
         }
+        return false;
     }
 
-    public void deleteChoiceByID(int id) {
-        Choice choice = choiceModel.deleteChoiceByID(id);
-        if(choice == null){
-            /** will be modified **/
+    public boolean deleteChoiceByID(int quizId, int questionId, int id) {
+        if(choiceModel.deleteChoiceByID(id)) {
+            return true;
         }
+        return false;
     }
 
-    public Choice insertChoice(Choice choice) {
-        Choice Newchoice = choiceModel.insertChoice(choice);
-        if(choice == null){
-            /** will be modified **/
-            return null;
-        }
-        return Newchoice;
+    public int addChoice(int quizId, int questionId, Choice choice) {
+        return choiceModel.addChoice(questionId ,choice);
     }
 }

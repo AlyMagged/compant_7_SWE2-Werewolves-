@@ -1,31 +1,46 @@
 package com.werewolves.quizsection.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Question {
     private int id;
     private String title;
-    private Collection<Choice> choices;
-    private int correctChoiceID;
+    private Collection<Choice> choices = null;
+    private Choice correctChoice;
     private Quiz quiz;
 
-    public Question() {
+    public Question(){}
+    public Question(int id) {
+        this.id = id;
     }
 
-    public Question(int id, String title) {
+    public Question(String title, Choice correctChoice, Quiz quiz) {
+        this.title = title;
+        this.correctChoice = correctChoice;
+        this.quiz = quiz;
+    }
+
+    public Question(int id, String title, Choice correctChoice, Quiz quiz) {
         this.id = id;
         this.title = title;
+        this.correctChoice = correctChoice;
+        this.quiz = quiz;
     }
 
-    public Question(String title) {
-        this.title = title;
-    }
-
-    public Question(int id, String title, Collection<Choice> choices, int correctChoiceID) {
+    public Question(int id, String title, Collection<Choice> choices, Choice correctChoice, Quiz quiz) {
         this.id = id;
         this.title = title;
         this.choices = choices;
-        this.correctChoiceID = correctChoiceID;
+        this.correctChoice = correctChoice;
+        this.quiz = quiz;
+    }
+
+    public Question(String title, Collection<Choice> choices, Choice correctChoice, Quiz quiz) {
+        this.title = title;
+        this.choices = choices;
+        this.correctChoice = correctChoice;
+        this.quiz = quiz;
     }
 
     public int getId() {
@@ -52,36 +67,19 @@ public class Question {
         this.choices = choices;
     }
 
-    public int getCorrectChoiceID() {
-        return correctChoiceID;
+    public void addChoice(Choice choice)
+    {
+        if(this.choices == null)
+            this.choices = new ArrayList<>();
+
+        this.choices.add(choice);
+    }
+    public Choice getCorrectChoice() {
+        return correctChoice;
     }
 
-    public void setCorrectChoiceID(int correctChoiceID) {
-        this.correctChoiceID = correctChoiceID;
-    }
-
-    public boolean addChoice(Choice choice){
-        return this.choices.add(choice);
-    }
-
-    public boolean updateChoice(Choice newChoice){
-        for (Choice c : this.choices) {
-            if(c.getId() == newChoice.getId()){
-                c = newChoice;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean deleteChoice(int id){
-        for (Choice c : this.choices) {
-            if(c.getId() == id){
-                this.choices.remove(c);
-                return true;
-            }
-        }
-        return false;
+    public void setCorrectChoice(Choice correctChoice) {
+        this.correctChoice = correctChoice;
     }
 
     public Quiz getQuiz() {
@@ -91,4 +89,5 @@ public class Question {
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
     }
+
 }

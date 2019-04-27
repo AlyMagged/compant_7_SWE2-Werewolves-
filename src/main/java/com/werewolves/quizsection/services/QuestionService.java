@@ -3,24 +3,27 @@ package com.werewolves.quizsection.services;
 
 import com.werewolves.quizsection.entities.Question;
 import com.werewolves.quizsection.models.QuestionModel;
+import com.werewolves.quizsection.models.mySQLModels.MySQLQuestionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 @Service
 public class QuestionService {
     @Autowired
-    @Qualifier("fakeQuestionModel")
+    @Qualifier("MySQLQuestionModel")
     QuestionModel questionModel;
 
-    public Collection<Question> getAllQuestions() {
-        Collection<Question> questions = this.questionModel.getAllQuestions();
+    public Collection<Question> getAllQuestions(int quizId) {
+        Collection<Question> questions = this.questionModel.getAllQuestions(quizId);
         return questions;
     }
 
-    public Question getQuestionByID(int id) {
+    public Question getQuestionByID(int quizId, int id) {
         Question question = this.questionModel.getQuestionByID(id);
         if(question == null){
             /** will be modified **/
@@ -30,30 +33,30 @@ public class QuestionService {
         }
     }
 
-    public Question updateQuestionByID(Question question) {
-        Question updatedQuestion = this.questionModel.updateQuestionByID(question);
-        /** will be some validation about the updateChoice value **/
-        if(question == null){
-            /** will be modified **/
-            return null;
-        }else{
-            return question;
-        }
+    public int insertQuestion(Question question) {
+        return  this.questionModel.addQuestion(question);
     }
 
-    public void deleteQuestionByID(int id) {
-        Question question = this.questionModel.deleteQuestionByID(id);
-        if(question == null){
-            /** will be modified **/
+    public boolean updateQuestionByID(int quizId, Question question) {
+        if(this.questionModel.updateQuestionByID(question)) {
+            return true;
         }
+        return false;
     }
 
-    public Question insertQuestion(Question question) {
-        Question NewQuestion = this.questionModel.insertQuestion(question);
-        if(question == null){
-            /** will be modified **/
-            return null;
+    public boolean deleteQuestionByID(int quizId, int id) {
+        if(this.questionModel.deleteQuestionByID(id)) {
+            return true;
         }
-        return NewQuestion;
+        return false;
+    }
+
+    public Map<Integer, Integer> getCorrectAnswerFor(ArrayList<Integer> questionsIds)
+    {
+        if(this.questionModel == null)
+            this.questionModel = new MySQLQuestionModel();
+        Map<Integer, Integer> map = this.questionModel.getCorrectAnswerFor(questionsIds);
+        System.out.println(map);
+        return map;
     }
 }

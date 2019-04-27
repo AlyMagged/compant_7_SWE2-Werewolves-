@@ -1,5 +1,8 @@
 package com.werewolves.quizsection.entities;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Quiz {
@@ -7,25 +10,43 @@ public class Quiz {
     private int creatorId;
     private String title;
     private int passScore;
-    private Skill skill;
-    private Collection<Submission> submissions;
-    private Collection<Question> questions;
+    private float duration;
+    private Skill skill = null;
+    private Collection<Submission> submissions = null;
+    private Collection<Question> questions = null;
+
+    public Quiz(){}
 
     public Quiz(int id) {
         this.id = id;
     }
 
-    public Quiz(int creatorId, String title, int passScore) {
+    public Quiz(int creatorId, String title, int passScore, float duration, Skill skill) {
         this.creatorId = creatorId;
         this.title = title;
         this.passScore = passScore;
+        this.duration = duration;
+        this.skill = skill;
     }
 
-    public Quiz(int id, int creatorId, String title, int passScore) {
+    public Quiz(int id, int creatorId, String title, int passScore, float duration, Skill skill) {
         this.id = id;
         this.creatorId = creatorId;
         this.title = title;
         this.passScore = passScore;
+        this.duration = duration;
+        this.skill = skill;
+    }
+
+
+    public Quiz(int id, int creatorId, String title, int passScore, float duration, Skill skill, Collection<Question> questions) {
+        this.id = id;
+        this.creatorId = creatorId;
+        this.title = title;
+        this.passScore = passScore;
+        this.duration = duration;
+        this.skill = skill;
+        this.questions = questions;
     }
 
     public int getId() {
@@ -60,6 +81,14 @@ public class Quiz {
         this.passScore = passScore;
     }
 
+    public float getDuration() {
+        return duration;
+    }
+
+    public void setDuration(float duration) {
+        this.duration = duration;
+    }
+
     public Skill getSkill() {
         return skill;
     }
@@ -82,5 +111,25 @@ public class Quiz {
 
     public void setQuestions(Collection<Question> questions) {
         this.questions = questions;
+    }
+
+    public void addQuestion(Question question)
+    {
+        if(this.questions == null)
+            this.questions = new ArrayList<>();
+        this.questions.add(question);
+    }
+
+    public Boolean hasQuestion(int questionId)
+    {
+        if(questions == null)
+            return false;
+
+        for(Question q : questions)
+        {
+            if(q.getId() == questionId)
+                return true;
+        }
+        return  false;
     }
 }

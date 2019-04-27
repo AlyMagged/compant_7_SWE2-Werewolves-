@@ -9,36 +9,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("api/quiz/{id}/question")
+@RequestMapping("api/quiz/{quizId}/question")
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
     @GetMapping(value = {"" , "/"})
-    public Collection<Question> getAllQuestions(){
-        return this.questionService.getAllQuestions();
+    public Collection<Question> getAllQuestions(@PathVariable int quizId){
+        return this.questionService.getAllQuestions(quizId);
     }
 
     @GetMapping(value = "/{id}")
-    public Question getChoiceByID(@PathVariable int id) {
-        return this.questionService.getQuestionByID(id);
+    public Question getQuestionByID(@PathVariable int quizId ,@PathVariable int id) {
+        return this.questionService.getQuestionByID(quizId ,id);
 
-    }
-
-    @PutMapping(value = "/{id}")
-    public Question updateChoiceByID(@RequestBody Question question){
-        return this.questionService.updateQuestionByID(question);
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public void deleteQuestionByID(@PathVariable int id){
-
-        this.questionService.deleteQuestionByID(id);
     }
 
     @PostMapping(value = {"" , "/"})
-    public Question insertQuestion(@RequestBody Question question){
+    public int addQuestion(@RequestBody Question question){
 
         return this.questionService.insertQuestion(question);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteQuestionByID(@PathVariable int quizId ,@PathVariable int id){
+
+        this.questionService.deleteQuestionByID(quizId , id);
+    }
+
+    @PutMapping(value = {"" , "/"})
+    public void updateQuestionByID(@PathVariable int quizId ,@RequestBody Question question){
+        this.questionService.updateQuestionByID(quizId , question);
+    }
+
 }

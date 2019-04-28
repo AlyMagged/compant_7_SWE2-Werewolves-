@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -71,5 +74,18 @@ public class QuestionServiceTest {
 
     @Test
     public void getCorrectAnswerFor() {
+        ArrayList<Integer> questionIds = new ArrayList<>();
+        questionIds.add(1);
+        questionIds.add(2);
+        questionIds.add(3);
+
+        Map<Integer , Integer> map = new HashMap<>();
+        map.put(1 , 10);
+        map.put(2 , 8);
+        map.put(3 , 18);
+
+        when(model.getCorrectAnswerFor(questionIds)).thenReturn(map);
+
+        assertEquals(3 , service.getCorrectAnswerFor(questionIds).size());
     }
 }

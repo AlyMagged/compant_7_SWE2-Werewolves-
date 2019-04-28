@@ -10,7 +10,7 @@ import java.util.Collection;
 @RestController
 
 
-@RequestMapping("/api/quiz")
+@RequestMapping("/api/quiz-section/quiz")
 public class QuizController {
 
     @Autowired

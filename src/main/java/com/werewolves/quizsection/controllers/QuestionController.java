@@ -21,25 +21,25 @@ public class QuestionController {
 
     @GetMapping(value = "/{id}")
     public Question getQuestionByID(@PathVariable int quizId ,@PathVariable int id) {
-        return this.questionService.getQuestionByID(quizId ,id);
+        return this.questionService.getQuestionByID(id);
 
     }
 
     @PostMapping(value = {"" , "/"})
     public int addQuestion(@RequestBody Question question){
 
-        return this.questionService.insertQuestion(question);
+        return this.questionService.addQuestion(question);
     }
 
     @DeleteMapping(value = "/{id}")
     public void deleteQuestionByID(@PathVariable int quizId ,@PathVariable int id){
 
-        this.questionService.deleteQuestionByID(quizId , id);
+        this.questionService.deleteQuestionByID(id);
     }
 
     @PutMapping(value = {"" , "/"})
     public void updateQuestionByID(@PathVariable int quizId ,@RequestBody Question question){
-        this.questionService.updateQuestionByID(quizId , question);
+        this.questionService.updateQuestionByID(question);
     }
 
 }

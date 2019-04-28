@@ -8,36 +8,36 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("api/quiz/{quizId}/question/{questionId}/choice")
+@RequestMapping("api/quiz-section/")
 public class ChoiceController {
 
     @Autowired
     private ChoiceService choiceService;
 
-    @GetMapping(value = {"" , "/"})
-    public Collection<Choice> getAllChoices(@PathVariable int quizId ,@PathVariable int questionId){
-        return this.choiceService.getAllChoices(quizId , questionId);
+    @GetMapping(value = "question/{questionId}/choice" )
+    public Collection<Choice> getAllChoices(@PathVariable int questionId){
+        return this.choiceService.getAllChoices(questionId);
     }
 
-    @GetMapping(value = "/{id}")
-    public Choice getChoiceByID(@PathVariable int quizId ,@PathVariable int questionId ,@PathVariable int id){
-        return this.choiceService.getChoiceByID(quizId , questionId , id);
+    @GetMapping(value = "choice/{id}")
+    public Choice getChoiceByID(@PathVariable int id){
+        return this.choiceService.getChoiceByID(id);
     }
 
-    @PostMapping(value = {"" , "/"})
-    public int addChoice(@PathVariable int quizId ,@PathVariable int questionId ,@RequestBody Choice choice){
-        return this.choiceService.addChoice(quizId , questionId ,choice);
+    @PostMapping(value = "question/{questionId}/choice")
+    public int addChoice(@PathVariable int questionId ,@RequestBody Choice choice){
+        return this.choiceService.addChoice(questionId ,choice);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public void deleteChoiceByID(@PathVariable int quizId ,@PathVariable int questionId , @PathVariable int id){
-        this.choiceService.deleteChoiceByID(quizId , questionId ,id);
+    @DeleteMapping(value = "choice/{id}")
+    public boolean deleteChoiceByID(@PathVariable int id){
+        return this.choiceService.deleteChoiceByID(id);
     }
 
 
-    @PutMapping(value = {"","/"})
-    public void updateChoiceByID(@PathVariable int quizId ,@PathVariable int questionId ,@RequestBody Choice choice){
-        this.choiceService.updateChoiceByID(quizId ,questionId ,choice);
+    @PutMapping(value = "choice")
+    public boolean updateChoiceByID(@RequestBody Choice choice){
+        return this.choiceService.updateChoiceByID(choice);
     }
 
 

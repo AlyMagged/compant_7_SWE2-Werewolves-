@@ -14,6 +14,12 @@ public class ChoiceController {
     @Autowired
     private ChoiceService choiceService;
 
+    @GetMapping(value = "hello")
+    public String greeting(){
+        Collection<Choice> choices = getAllChoices(1);
+        return "Hello World";
+    }
+
     @GetMapping(value = "question/{questionId}/choice" )
     public Collection<Choice> getAllChoices(@PathVariable int questionId){
         return this.choiceService.getAllChoices(questionId);

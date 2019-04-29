@@ -23,11 +23,13 @@ public class SubmissionService {
 
     public Collection<Submission> getAllSubmissions()
     {
+
         return this.submissionModel.getAllSubmissions();
     }
 
     public Submission getSubmissionByID(int id )
     {
+
         return this.submissionModel.getSubmissionByID(id);
     }
 

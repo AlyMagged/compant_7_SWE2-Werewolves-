@@ -13,12 +13,12 @@ public class ChoiceService {
     @Qualifier("MySQLChoiceModel")
     private ChoiceModel choiceModel;
 
-    public Collection<Choice> getAllChoices(int quizId, int questionId) {
+    public Collection<Choice> getAllChoices(int questionId) {
         Collection<Choice> choices = choiceModel.getAllChoices(questionId);
         return choices;
     }
 
-    public Choice getChoiceByID(int quizId, int questionId, int id) {
+    public Choice getChoiceByID(int id) {
         Choice choice = choiceModel.getChoiceByID(id);
         if(choice == null){
             /** will be modified **/
@@ -28,21 +28,22 @@ public class ChoiceService {
         }
     }
 
-    public boolean updateChoiceByID(int quizId, int questionId, Choice choice) {
+    public boolean updateChoiceByID(Choice choice) {
         if(choiceModel.updateChoice(choice)) {
             return true;
         }
         return false;
     }
 
-    public boolean deleteChoiceByID(int quizId, int questionId, int id) {
+    public boolean deleteChoiceByID(int id) {
         if(choiceModel.deleteChoiceByID(id)) {
             return true;
         }
         return false;
     }
 
-    public int addChoice(int quizId, int questionId, Choice choice) {
+    public int addChoice(int questionId, Choice choice) {
         return choiceModel.addChoice(questionId ,choice);
     }
+
 }

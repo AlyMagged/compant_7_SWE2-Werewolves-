@@ -23,7 +23,7 @@ public class QuestionService {
         return questions;
     }
 
-    public Question getQuestionByID(int quizId, int id) {
+    public Question getQuestionByID(int id) {
         Question question = this.questionModel.getQuestionByID(id);
         if(question == null){
             /** will be modified **/
@@ -33,18 +33,18 @@ public class QuestionService {
         }
     }
 
-    public int insertQuestion(Question question) {
+    public int addQuestion(Question question) {
         return  this.questionModel.addQuestion(question);
     }
 
-    public boolean updateQuestionByID(int quizId, Question question) {
+    public boolean updateQuestionByID(Question question) {
         if(this.questionModel.updateQuestionByID(question)) {
             return true;
         }
         return false;
     }
 
-    public boolean deleteQuestionByID(int quizId, int id) {
+    public boolean deleteQuestionByID(int id) {
         if(this.questionModel.deleteQuestionByID(id)) {
             return true;
         }

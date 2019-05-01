@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -142,5 +143,24 @@ public class SubmissionControllerTest {
                 .content(json)
         )
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getSubmissionsForSkill() throws Exception {
+        String uri = "/api/submission/skill/1";
+        int skillId = 1;
+        when(service.getSubmissionForSkill(skillId)).thenReturn(
+                Stream.of(
+                        new Submission(1 ),
+                        new Submission(2 ),
+                        new Submission(3 )
+                ).collect(Collectors.toList())
+        );
+
+        mvc.perform(
+                get(uri)
+        )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.*" , Matchers.hasSize(3)));
     }
 }

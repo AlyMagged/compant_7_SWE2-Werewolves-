@@ -74,5 +74,16 @@ public class SubmissionServiceTest {
         assertEquals(2 , service.getSubmissionsForUser(userId).size());
     }
 
+    @Test
+    public void getSubmissionsForSkill() {
+        int skillId = 3;
+        when(model.getSubmissionForSkill(skillId)).thenReturn(
+                Stream.of(
+                        new Submission(1, 10, 5, new Quiz(1)),
+                        new Submission(3, 20, 10, new Quiz(5))
+                ).collect(Collectors.toList())
+        );
+        assertEquals(2 , service.getSubmissionForSkill(skillId).size());
+    }
 
 }

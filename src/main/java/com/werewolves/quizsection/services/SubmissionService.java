@@ -58,6 +58,10 @@ public class SubmissionService {
         return this.submissionModel.addSubmission(new Submission(score,userId, new Quiz(quizId), strDate));
     }
 
+    public Collection<Submission> getSubmissionForSkill(int skillId){
+        return submissionModel.getSubmissionForSkill(skillId);
+    }
+
     private int evaluateSubmission(int quizId, Collection<QuestionAnswerPair> answersIds)
     {
         if(answersIds.size()<1)
@@ -80,4 +84,6 @@ public class SubmissionService {
         }
         return score;
     }
+
+
 }

@@ -182,4 +182,37 @@ public class MySQLSubmissionModel extends SubmissionModel {
         MySQLConnector.closeConnection();
         return submissions;
     }
+
+    @Override
+    public Collection<Submission> getSubmissionForSkill(int skillId) {
+        MySQLConnector.openConnection();
+
+        String q = "SELECT s.id,s.user_id,s.quiz_id,s.score,s.submit_time FROM submissions s JOIN quizes q ON s.quiz_id = q.id WHERE q.skill_type_id = " + skillId;
+
+        ResultSet resultSet = MySQLConnector.executeQuery(q);
+        Collection<Submission> submissions = new ArrayList<>();
+
+        int     id,
+                quiz_id,
+                score;
+        String submit_time;
+
+        try {
+            while(resultSet.next())
+            {
+                id = resultSet.getInt("id");
+                quiz_id = resultSet.getInt("quiz_id");
+                score = resultSet.getInt("score");
+                submit_time = resultSet.getString("submit_time");
+                submissions.add( new Submission(id,score,skillId,new Quiz(quiz_id),submit_time));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            MySQLConnector.closeConnection();
+            return null;
+        }
+        MySQLConnector.closeConnection();
+        return submissions;
+    }
 }

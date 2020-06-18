@@ -37,7 +37,7 @@ public class ChoiceServiceTest {
             ).collect(Collectors.toList())
         );
 
-        Collection<Choice> choices = model.getAllChoices(questionId);
+        Collection<Choice> choices = service.getAllChoices(questionId);
         assertEquals(2 , choices.size());
     }
 

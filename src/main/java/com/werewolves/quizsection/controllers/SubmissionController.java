@@ -40,6 +40,12 @@ public class SubmissionController {
         return submissionService.getSubmissionsForUser(userId);
     }
 
+    @GetMapping(value = "/skill/{skillId}")
+    public Collection<Submission>  getSubmissionsForSkill(@PathVariable int skillId)
+    {
+        return submissionService.getSubmissionForSkill(skillId);
+    }
+
     @PostMapping(value = "/quiz/{quizId}/user/{userId}")
     public int addSubmission(@PathVariable int quizId, @PathVariable int userId, @RequestBody Collection<QuestionAnswerPair> answersIds)
     {
